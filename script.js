@@ -15,7 +15,9 @@ function addRow(){
     let cell = document.createElement("td");
 
     cell.onclick = function () {
-        tableText(this);
+        var newColor = document.getElementById("colorDropdown");
+        var val = newColor.options[newColor.selectedIndex].value;
+        this.style.backgroundColor = val;
     }
 
     newRow.appendChild(cell);
@@ -50,7 +52,9 @@ function addColumn(){
     let newCol = document.createElement('td');
 
     newCol.onclick = function () {
-        tableText(this);
+        var newColor = document.getElementById("colorDropdown");
+        var val = newColor.options[newColor.selectedIndex].value;
+        this.style.backgroundColor = val;
     }
 
     rows[i].appendChild(newCol);
