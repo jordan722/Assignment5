@@ -24,9 +24,12 @@ function addRow(){
 function removeRow() {
     let mainGrid = document.getElementById("main-grid");
     let elemToRemove = mainGrid.lastElementChild;
-    console.log(elemToRemove);
-    mainGrid.removeChild(elemToRemove);
 
+    if(elemToRemove === null) {
+        alert("No More Rows To Remove!");
+    } else {
+        mainGrid.removeChild(elemToRemove);
+    }
     amountOfRows--;
 }
 
@@ -44,6 +47,21 @@ function addColumn(){
   amountOfColumns++;
 }
 
+let mainGrid = document.getElementById("main-grid");
+
+if (mainGrid != null) {
+    for (var i = 0; i < mainGrid.rows.length; i++) {
+        for (var j = 0; j < mainGrid.rows[i].cells.length; j++)
+        mainGrid.rows[i].cells[j].onclick = function () {
+            tableText(this);
+        };
+    }
+}
+
+function tableText(tableCell) {
+    alert("Hi");
+}
+
 // Remove column from grid
 function removeColumn() {
 
@@ -54,4 +72,5 @@ function removeColumn() {
     }
 
     amountOfColumns--;
+
 }
