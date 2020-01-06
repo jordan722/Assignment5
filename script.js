@@ -35,6 +35,13 @@ function addRow(){
   // Populate the row with squares or cells
   for(var i = 0; i < amountOfColumns; i++){
     let cell = document.createElement("td");
+
+    //Add event listener to newly added cells
+    cell.onclick = function () {
+        var newColor = document.getElementById("colorDropdown");
+        var val = newColor.options[newColor.selectedIndex].value;
+        this.style.backgroundColor = val;
+    }
     addTriggers(cell);
 
     newRow.appendChild(cell);
@@ -69,6 +76,7 @@ function addColumn(){
     let newCol = document.createElement('td');
     addTriggers(newCol);
 
+    //Add event listener to newly added cells
     newCol.onclick = function () {
         var newColor = document.getElementById("colorDropdown");
         var val = newColor.options[newColor.selectedIndex].value;
@@ -81,20 +89,6 @@ function addColumn(){
   amountOfColumns++;
 }
 
-let mainGrid = document.getElementById("main-grid");
-
-if (mainGrid != null) {
-    for (var i = 0; i < mainGrid.rows.length; i++) {
-        for (var j = 0; j < mainGrid.rows[i].cells.length; j++)
-            mainGrid.rows[i].cells[j].onclick = function () {
-
-                var newColor = document.getElementById("colorDropdown");
-                var val = newColor.options[newColor.selectedIndex].value;
-                this.style.backgroundColor = val;
-        };
-    }
-}
-
 // Remove column from grid
 function removeColumn() {
 
@@ -105,5 +99,55 @@ function removeColumn() {
     }
 
     amountOfColumns--;
+
+}
+
+function clearAllColors() {
+
+    let table = document.getElementById("main-grid");
+
+    if(table !== null){
+
+        for (let i = 0, row; row = table.rows[i]; i++) {
+            for (let j = 0, col; col = row.cells[j]; j++) {
+                 row.cells[j].style.backgroundColor = "gray";
+            }  
+         }
+    }
+}
+
+function fillAllColors() {
+
+    let table = document.getElementById("main-grid");
+
+    if(table !== null) {
+        
+        for (let i = 0, row; row = table.rows[i]; i++) {
+            for (let j = 0, col; col = row.cells[j]; j++) {
+                 var newColor = document.getElementById("colorDropdown");
+                 var val = newColor.options[newColor.selectedIndex].value;
+                 row.cells[j].style.backgroundColor = val;
+            }  
+         }
+    }
+}
+
+function fillAllUnfilledColors() {
+
+    let table = document.getElementById("main-grid");
+
+    if(table !== null) {
+
+        for (let i = 0, row; row = table.rows[i]; i++) {
+            for (let j = 0, col; col = row.cells[j]; j++) {
+                 var newColor = document.getElementById("colorDropdown");
+                 var val = newColor.options[newColor.selectedIndex].value;
+     
+                 if(row.cells[j].style.backgroundColor === "" || row.cells[j].style.backgroundColor === "gray") {
+                     row.cells[j].style.backgroundColor = val;
+                 }
+            }  
+         }
+    }
 
 }
