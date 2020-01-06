@@ -17,7 +17,13 @@ function addRow(){
 
   mainGrid.appendChild(newRow);
   amountOfRows++;
+}
 
+function removeRow() {
+    let mainGrid = document.getElementById("main-grid");
+    let elemToRemove = mainGrid.lastElementChild;
+    console.log(elemToRemove);
+    mainGrid.removeChild(elemToRemove);
 }
 
 function addColumn(){
