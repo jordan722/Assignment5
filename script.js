@@ -22,8 +22,12 @@ function addRow(){
 function removeRow() {
     let mainGrid = document.getElementById("main-grid");
     let elemToRemove = mainGrid.lastElementChild;
-    console.log(elemToRemove);
-    mainGrid.removeChild(elemToRemove);
+
+    if(elemToRemove === null) {
+        alert("No More Rows To Remove!");
+    } else {
+        mainGrid.removeChild(elemToRemove);
+    }
 }
 
 function addColumn(){
