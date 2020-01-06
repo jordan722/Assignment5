@@ -19,3 +19,15 @@ function addRow(){
   amountOfRows++;
 
 }
+
+function addColumn(){
+  let rows = document.getElementsByTagName("tr");
+  console.log(rows);
+
+  for(var i = 0; i < rows.length; i++){
+    console.log('row');
+    rows[i].appendChild(document.createElement('td'));
+  }
+
+  amountOfColumns++;
+}
