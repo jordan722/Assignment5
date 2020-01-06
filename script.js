@@ -1,7 +1,29 @@
 // write funciton to add row to grid
 
 let amountOfRows = 1;
-let amountOfColumns = 2;
+let amountOfColumns = 1;
+let draw = false;
+
+
+// Triggers to allow for hold and click color change
+function addTriggers(cell){
+  cell.onmouseover = function(){
+    if(draw){
+      var newColor = document.getElementById("colorDropdown");
+      var val = newColor.options[newColor.selectedIndex].value;
+      this.style.backgroundColor = val;
+    }
+  }
+  cell.onmousedown = function () {
+      var newColor = document.getElementById("colorDropdown");
+      var val = newColor.options[newColor.selectedIndex].value;
+      this.style.backgroundColor = val;
+      draw = true;
+  }
+  cell.onmouseup = function() {
+    draw = false;
+  }
+}
 
 // Add row to grid
 function addRow(){
@@ -13,12 +35,7 @@ function addRow(){
   // Populate the row with squares or cells
   for(var i = 0; i < amountOfColumns; i++){
     let cell = document.createElement("td");
-
-    cell.onclick = function () {
-        var newColor = document.getElementById("colorDropdown");
-        var val = newColor.options[newColor.selectedIndex].value;
-        this.style.backgroundColor = val;
-    }
+    addTriggers(cell);
 
     newRow.appendChild(cell);
   }
@@ -50,6 +67,7 @@ function addColumn(){
     console.log('row');
 
     let newCol = document.createElement('td');
+    addTriggers(newCol);
 
     newCol.onclick = function () {
         var newColor = document.getElementById("colorDropdown");
