@@ -13,6 +13,11 @@ function addRow(){
   // Populate the row with squares or cells
   for(var i = 0; i < amountOfColumns; i++){
     let cell = document.createElement("td");
+
+    cell.onclick = function () {
+        tableText(this);
+    }
+
     newRow.appendChild(cell);
   }
 
@@ -41,7 +46,14 @@ function addColumn(){
 
   for(var i = 0; i < rows.length; i++){
     console.log('row');
-    rows[i].appendChild(document.createElement('td'));
+
+    let newCol = document.createElement('td');
+
+    newCol.onclick = function () {
+        tableText(this);
+    }
+
+    rows[i].appendChild(newCol);
   }
 
   amountOfColumns++;
@@ -52,14 +64,13 @@ let mainGrid = document.getElementById("main-grid");
 if (mainGrid != null) {
     for (var i = 0; i < mainGrid.rows.length; i++) {
         for (var j = 0; j < mainGrid.rows[i].cells.length; j++)
-        mainGrid.rows[i].cells[j].onclick = function () {
-            tableText(this);
+            mainGrid.rows[i].cells[j].onclick = function () {
+
+                var newColor = document.getElementById("colorDropdown");
+                var val = newColor.options[newColor.selectedIndex].value;
+                this.style.backgroundColor = val;
         };
     }
-}
-
-function tableText(tableCell) {
-    alert("Hi");
 }
 
 // Remove column from grid
