@@ -3,6 +3,7 @@
 let amountOfRows = 1;
 let amountOfColumns = 2;
 
+// Add row to grid
 function addRow(){
   // Grab the main grid
   let mainGrid = document.getElementById("main-grid");
@@ -19,13 +20,18 @@ function addRow(){
   amountOfRows++;
 }
 
+// Remove row from grid
 function removeRow() {
     let mainGrid = document.getElementById("main-grid");
     let elemToRemove = mainGrid.lastElementChild;
     console.log(elemToRemove);
     mainGrid.removeChild(elemToRemove);
+
+    amountOfRows--;
 }
 
+
+// Add column to grid
 function addColumn(){
   let rows = document.getElementsByTagName("tr");
   console.log(rows);
@@ -36,4 +42,16 @@ function addColumn(){
   }
 
   amountOfColumns++;
+}
+
+// Remove column from grid
+function removeColumn() {
+
+    let rows = document.getElementsByTagName("tr")
+    for(var i = 0; i < rows.length; i++){
+        let elemToRemove = rows[i].lastElementChild;
+        rows[i].removeChild(elemToRemove);
+    }
+
+    amountOfColumns--;
 }
