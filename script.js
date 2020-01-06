@@ -1,7 +1,29 @@
 // write funciton to add row to grid
 
 let amountOfRows = 1;
-let amountOfColumns = 2;
+let amountOfColumns = 1;
+let draw = false;
+
+
+// Triggers to allow for hold and click color change
+function addTriggers(cell){
+  cell.onmouseover = function(){
+    if(draw){
+      var newColor = document.getElementById("colorDropdown");
+      var val = newColor.options[newColor.selectedIndex].value;
+      this.style.backgroundColor = val;
+    }
+  }
+  cell.onmousedown = function () {
+      var newColor = document.getElementById("colorDropdown");
+      var val = newColor.options[newColor.selectedIndex].value;
+      this.style.backgroundColor = val;
+      draw = true;
+  }
+  cell.onmouseup = function() {
+    draw = false;
+  }
+}
 
 // Add row to grid
 function addRow(){
@@ -20,6 +42,7 @@ function addRow(){
         var val = newColor.options[newColor.selectedIndex].value;
         this.style.backgroundColor = val;
     }
+    addTriggers(cell);
 
     newRow.appendChild(cell);
   }
@@ -51,6 +74,7 @@ function addColumn(){
     console.log('row');
 
     let newCol = document.createElement('td');
+    addTriggers(newCol);
 
     //Add event listener to newly added cells
     newCol.onclick = function () {
@@ -63,23 +87,6 @@ function addColumn(){
   }
 
   amountOfColumns++;
-}
-
-// Click on a cell and change its color to the currently selected color
-let mainGrid = document.getElementById("main-grid");
-
-if (mainGrid !== null) {
-
-    for (let i = 0, row; row = mainGrid.rows[i]; i++) {
-        for (let j = 0, col; col = row.cells[j]; j++) {
-
-             row.cells[j].onclick = function () {
-                var newColor = document.getElementById("colorDropdown");
-                var val = newColor.options[newColor.selectedIndex].value;
-                this.style.backgroundColor = val;
-            }
-        }  
-     }
 }
 
 // Remove column from grid
